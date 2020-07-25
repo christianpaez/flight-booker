@@ -7,6 +7,6 @@ class Flight < ApplicationRecord
   belongs_to :to, :class_name => "Airport"
 
   #scopes
-  scope :departure_dates, -> {select(:departure_date)}
+  scope :departure_dates, -> {select(:departure_date).order(departure_date: :asc)}
 
 end

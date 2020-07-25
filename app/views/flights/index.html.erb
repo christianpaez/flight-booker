@@ -3,6 +3,7 @@
 
 <%= render "flights/search_form", flight: @flight %>
 
+  <% if @found_flights && @found_flights.count > 0 %>
 <table>
   <thead>
     <tr>
@@ -15,7 +16,7 @@
   </thead>
 
   <tbody>
-    <% @flights.each do |flight| %>
+    <% @found_flights.each do |flight| %>
       <tr>
         <td><%= flight.duration %></td>
         <td><%= flight.departure_date %></td>
@@ -26,9 +27,16 @@
         <td><%= link_to 'Destroy', flight, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
+  <% elsif @random_flight %>
+    <p>No flights found, go ahead and search!</p>
+    <h2>Recommended flight:</h2>
+    <td><%= @random_flight.duration %></td>
+    <td><%= @random_flight.departure_date %></td>
+    <td><%= @random_flight.from.code %></td>
+    <td><%= @random_flight.to.code %></td>
+  <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Flight', new_flight_path %>
