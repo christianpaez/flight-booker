@@ -17,11 +17,14 @@ Airport.delete_all
         code: Faker::Address.city
     )
     5.times do
-       Flight.create(
-           duration: Faker::Number.between(from: 1, to: 10) * 10,
-           departure_date: Faker::Date.between(from: Date.today, to: '2021-09-25'),
-           from: airport_from,
-           to: airport_to
-        ) 
+        date = Faker::Date.between(from: Date.today, to: '2021-09-25')
+        2.times do
+           Flight.create(
+               duration: Faker::Number.between(from: 1, to: 10) * 10,
+               departure_date: date,
+               from: airport_from,
+               to: airport_to
+            ) 
+        end
     end
 end
