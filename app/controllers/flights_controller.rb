@@ -5,10 +5,9 @@ class FlightsController < ApplicationController
   # GET /flights.json
   def index
     if params[:flight]
-      puts search_params
       @found_flights = Flight.where(from_id: search_params[:from_id], to_id: search_params[:to_id], departure_date: Date.parse(search_params[:departure_date]))
       @booking = Booking.new
-      @booking.passengers = params[:flight][:passengers]
+      @number_of_passengers = params[:flight][:passengers]
       if @found_flights.count === 0
         @random_flight = Flight.limit(1).order("RANDOM()").take
         flash.now[:warning] = "No flight found for given params!"

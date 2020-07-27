@@ -10,6 +10,7 @@
         <th scope="col">Departure Date</th>
         <th scope="col">From</th>
         <th scope="col">To</th>
+        <th scope="col"># Passengers</th>
       </tr>
     </thead>
     <tbody>
@@ -17,20 +18,26 @@
         <% @found_flights.each_with_index do |flight, index| %>
           <tr>
             <td>
-              <input type="radio" aria-label="Radio button for following text input">
+              <% if index === 0 %>
+                <%= radio_button("booking", "flight_id", "#{flight[:id]}", checked: true)%>
+              <% else %>
+                <%= radio_button("booking", "flight_id", "#{flight[:id]}")%>
+              <% end %>
             </td>
             <td><%= flight.duration %></td>
             <td><%= flight.departure_date.strftime("%A, %B %d %Y") %></td>
             <td><%= flight.from.code %></td>
             <td><%= flight.to.code %></td>
+            <td><%= @number_of_passengers %></td>
           </tr>
         <% end %>
+        <%= hidden_field(:booking, :passengers) %>
         <div class="actions">
           <%= form.submit "Book Flight!", data: { disable_with: "Submitting..." }, class: "btn btn-secondary" %>
         </div>
       <% end %>
     <% elsif @random_flight %>
-      <p>No flights found, go ahead and search!</p>
+      <p>No flights match your search query!</p>
       <h2>Recommended flight:</h2>
       <table class="table mt-3">
         <thead>
@@ -58,15 +65,15 @@
             <% end %>
             <tr>
               <td>
-                <%= radio_button("booking", "flight", "#{@random_flight[:id]}")%>
+                <%= radio_button("booking", "flight_id", "#{@random_flight[:id]}", checked: true)%>
               </td>
               <td><%= @random_flight.duration %></td>
               <td><%= @random_flight.departure_date.strftime("%A, %B %d %Y") %></td>
               <td><%= @random_flight.from.code %></td>
               <td><%= @random_flight.to.code %></td>
-              <td><%= @booking[:passengers] %></td>
+              <td><%= @number_of_passengers %></td>
             </tr>
-            <%= hidden_field(:booking, :passengers) %>
+            <%= hidden_field(:booking, :number_of_passengers, :value => @number_of_passengers) %>
             <div class="actions">
               <%= form.submit "Book Flight!", data: { disable_with: "Submitting..." }, class: "btn btn-secondary" %>
             </div>

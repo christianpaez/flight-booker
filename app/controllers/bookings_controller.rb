@@ -15,7 +15,12 @@ class BookingsController < ApplicationController
   # GET /bookings/new
   def new
     @booking = Booking.new(booking_params)
-    puts @booking.valid?
+    unless @booking.valid?
+      flash.clear
+      redirect_back fallback_location: root_path, flash: {danger: "Please choose a flight."} 
+    else
+      
+    end
 
 
   end

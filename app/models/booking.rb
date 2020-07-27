@@ -3,4 +3,6 @@ class Booking < ApplicationRecord
 
   validates :passengers, presence: true
   validates :flight, presence: true
+
+  has_many :passengers
 end
