@@ -14,12 +14,12 @@ class BookingsController < ApplicationController
 
   # GET /bookings/new
   def new
-    @booking = Booking.new(booking_params)
-    unless @booking.valid?
-      flash.clear
+    @booking = Booking.new(flight_id: booking_params[:flight_id])
+    unless @booking.flight
       redirect_back fallback_location: root_path, flash: {danger: "Please choose a flight."} 
     else
-      
+      @number_of_passengers = booking_params[:number_of_passengers].to_i
+    
     end
 
 
@@ -32,6 +32,7 @@ class BookingsController < ApplicationController
   # POST /bookings
   # POST /bookings.json
   def create
+    fail
     @booking = Booking.new(booking_params)
 
     respond_to do |format|
@@ -76,7 +77,8 @@ class BookingsController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
+
     def booking_params
-      params.require(:booking).permit(:passengers, :flight_id)
+      params.require(:booking).permit(:flight_id, :number_of_passengers)
     end
 end

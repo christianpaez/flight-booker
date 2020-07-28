@@ -10,16 +10,14 @@
       </ul>
     </div>
   <% end %>
+  
+<% @number_of_passengers.times do %>
+  <%= fields_for booking.passengers.build do |passenger| %>
+    Name  : <%= passenger.text_field :name %>
+  <% end %>
+<% end %>
 
-  <div class="field">
-    <%= form.label :passengers %>
-    <%= form.number_field :passengers %>
-  </div>
 
-  <div class="field">
-    <%= form.label :flight_id %>
-    <%= form.text_field :flight_id %>
-  </div>
 
   <div class="actions">
     <%= form.submit %>
