@@ -73,12 +73,12 @@
               <td><%= @random_flight.to.code %></td>
               <td><%= @number_of_passengers %></td>
             </tr>
+             </tbody>
+    </table>
+    <br>
             <%= hidden_field(:booking, :number_of_passengers, :value => @number_of_passengers) %>
             <div class="actions">
               <%= form.submit "Book Flight!", data: { disable_with: "Submitting..." }, class: "btn btn-secondary" %>
             </div>
           <% end %>
         <% end %>
-      </tbody>
-    </table>
-    <br>

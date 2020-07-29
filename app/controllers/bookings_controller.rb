@@ -18,7 +18,10 @@ class BookingsController < ApplicationController
     unless @booking.flight
       redirect_back fallback_location: root_path, flash: {danger: "Please choose a flight."} 
     else
-      @number_of_passengers = booking_params[:number_of_passengers].to_i
+      number_of_passengers = booking_params[:number_of_passengers].to_i
+      number_of_passengers.times do
+        @booking.passengers.build
+      end
     
     end
 
@@ -32,12 +35,11 @@ class BookingsController < ApplicationController
   # POST /bookings
   # POST /bookings.json
   def create
-    fail
-    @booking = Booking.new(booking_params)
+    @booking = Booking.new(create_booking_params)
 
     respond_to do |format|
       if @booking.save
-        format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
+        format.html { redirect_to @booking, success: 'Booking was successfully created.' }
         format.json { render :show, status: :created, location: @booking }
       else
         format.html { render :new }
@@ -80,5 +82,9 @@ class BookingsController < ApplicationController
 
     def booking_params
       params.require(:booking).permit(:flight_id, :number_of_passengers)
+    end
+
+    def create_booking_params
+      params.require(:booking).permit(:flight_id, passengers_attributes: [:name, :email])
     end
 end
