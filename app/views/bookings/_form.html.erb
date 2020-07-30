@@ -1,4 +1,4 @@
-<%= form_with(model: @booking, local: true) do |form| %>
+<%= form_with(model: @booking, local: true, class: "px-2") do |form| %>
   <% if @booking.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
@@ -11,10 +11,23 @@
   <% end %>
   <%= hidden_field(:booking, :flight_id, :value => @booking.flight_id) %>
   <%= form.fields_for :passengers do |passenger_form| %>
-    Name  : <%= passenger_form.text_field :name %>
-    Email  : <%= passenger_form.text_field :email %>
+  <h5><strong>Passenger #<%= passenger_form.options[:child_index]+1 %></strong></h5>
+  <div class="form-group">
+  <div class="form-row">
+    <div class="col-sm-6">
+            <%= label :passenger, :name %>
+             <%= passenger_form.text_field :name, class: "form-control" %>
+    </div>
+    <div class="col-sm-6">
+                       <%= label :passenger, :email %>
+             <%= passenger_form.text_field :email, class: "form-control" %>
+    </div>
+    </div>
+    </div>
   <% end %>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-success", data: { disable_with: "Please wait..." } %>
+    <%= link_to 'Back', flights_path, class: "btn btn-secondary", data: {disable_with: "Please wait..."} %>
+
   </div>
 <% end %>

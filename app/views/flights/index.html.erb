@@ -31,10 +31,13 @@
             <td><%= @number_of_passengers %></td>
           </tr>
         <% end %>
-        <%= hidden_field(:booking, :passengers) %>
-        <div class="actions">
-          <%= form.submit "Book Flight!", data: { disable_with: "Submitting..." }, class: "btn btn-secondary" %>
-        </div>
+        </tbody>
+        </table>
+        <br>
+            <%= hidden_field(:booking, :number_of_passengers, :value => @number_of_passengers) %>
+            <div class="actions">
+              <%= form.submit "Book Flight!", data: { disable_with: "Submitting..." }, class: "btn btn-secondary" %>
+            </div>
       <% end %>
     <% elsif @random_flight %>
       <p>No flights match your search query!</p>

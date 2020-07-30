@@ -3,6 +3,5 @@
 
 <h3>Passengers Details</h3>
   <% @booking.passengers.each_with_index do |passenger, index| %>
-    <p>#<%= index+1%></p>
-    <%= render "passenger_details", passenger: passenger%>
+    <%= render partial: "passenger_details", :locals =>  { :index => index, :passenger => passenger}%>
   <% end %>
