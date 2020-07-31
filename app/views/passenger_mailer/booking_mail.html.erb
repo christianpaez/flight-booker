@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi, <%= @passenger[:name] %>!</h1>
+    You have successfully booked a flight on our Flight Booker App,
+    Here are the details:
+    
+    <p>Flight ID: <%= @flight[:id] %></p>
+        <p>Departure Date: <%= @flight[:departure_date].strftime("%A, %B %d %Y") %></p>
+            <p>From: <%= @flight.from.code %></p>
+                <p>To: <%= @flight.to.code %></p>
+                <p>Number of Passengers: <%= @booking.passengers.count %></p>
+                    <p>Thanks for booking and have a great day!</p> 
+  </body>
+</html>

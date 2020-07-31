@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Passenger.delete_all
+Booking.delete_all
 Flight.delete_all
 Airport.delete_all
 

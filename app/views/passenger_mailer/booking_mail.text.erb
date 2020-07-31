@@ -1,0 +1,13 @@
+Hi, <%= @passenger[:name] %>!
+===============================================
+ 
+You have successfully booked a flight on our Flight Booker App,
+Here are the details:
+
+Flight ID: <%= @flight[:id] %>
+Departure Date: <%= @flight[:departure_date].strftime("%A, %B %d %Y") %>
+From: <%= @flight.from.code %>
+To: <%= @flight.to.code %>
+Number of Passengers: <%= @booking.passengers.count %> 
+ 
+Thanks for booking and have a great day!

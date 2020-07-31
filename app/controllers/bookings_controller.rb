@@ -22,10 +22,7 @@ class BookingsController < ApplicationController
       number_of_passengers.times do
         @booking.passengers.build
       end
-    
     end
-
-
   end
 
   # GET /bookings/1/edit
@@ -39,6 +36,10 @@ class BookingsController < ApplicationController
 
     respond_to do |format|
       if @booking.save
+        @flight = @booking.flight
+        @booking.passengers.each do|passenger|
+          PassengerMailer.booking_mail(passenger, @flight, @booking).deliver_now!
+        end
         format.html { redirect_to @booking, success: 'Booking was successfully created.' }
         format.json { render :show, status: :created, location: @booking }
       else
